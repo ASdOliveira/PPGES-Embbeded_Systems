@@ -1,8 +1,8 @@
 /****************************************************
  * 
- * Exercício 2 - Aula 1
+ * Exercicio 2 - Aula 1
  * 
- * Portas A e B como saídas
+ * Portas A e B como saidas
  * Portas C e D como entradas
  * 
  * 2 bits da porta E como controle
@@ -16,11 +16,12 @@
  ***************************************************/
 
 #include <16F877a.h>
+#include "typedef.h"
 #use delay (clock = 20000000)
 #fuses HS,NOWDT, NOPROTECT, NOPUT, NOBROWNOUT, NOLVP
 
-// Variáveis auxiliares:
-int port_c = 0, port_d = 0, port_e = 0;
+// Variaveis auxiliares:
+uint8_t port_c = 0, port_d = 0, port_e = 0;
 
 
 void main()
@@ -32,7 +33,7 @@ void main()
         port_c = input_a();
         port_d = input_b();
         
-        // Condição para a saída.
+        // Condicao para a saida.
         switch (port_e)
         {
             case 0x00:

@@ -1,0 +1,11 @@
+*.ccspjt
+*.cof
+*.err
+*.esym
+*.hex
+*.lst
+*.STA
+*.sym
+*.tre
+*.xsym
+/Aula1/__history/
