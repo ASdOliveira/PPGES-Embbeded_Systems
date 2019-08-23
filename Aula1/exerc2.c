@@ -30,8 +30,8 @@ void main()
     {
         // Leitura das entradas:
         port_e = input_e();   
-        port_c = input_a();
-        port_d = input_b();
+        port_c = input_c();
+        port_d = input_d();
         
         // Condicao para a saida.
         switch (port_e)
