@@ -1,0 +1,24 @@
+#ifndef __KEYBOARD__
+#define __KEYBOARD__
+
+#include <16f877a.h>
+#include <typedef.h>
+
+
+void init()
+{
+ // usar port B, de 0 a 3 como saídas e de 4 a 7 como entradas.
+ #use fixed_io (b_outputs = pin_b0,pin_b1,pin_b2,pin_b3)
+ //#use fixed_io (b_inputs = pin_b4,pin_b5,pin_b6,pin_b7)
+}
+
+uint8_t read()
+{
+  output_b(0b0000011);
+  output_a(input_b());
+}
+
+
+
+
+#endif

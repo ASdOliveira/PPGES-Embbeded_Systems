@@ -1,0 +1,13 @@
+#include <main.h>
+#include <keyboard.h>
+
+
+void main()
+{
+   init();
+   while(TRUE)
+   {
+     read();
+   }
+
+}
