@@ -9,7 +9,7 @@ uint8_t port = 0x01;
 
 void main()
 {
-   key_init(); // configuracao inicial dos pinos do teclado matricial 4x4
+    key_init(); // configuracao inicial dos pinos do teclado matricial 4x4
    while(TRUE)
    {
     lerTec = key_read();   // ler qual tecla foi pressionada, caso nenhuma tenha sido pressionada, é retornado 0xFF.

@@ -8,6 +8,8 @@
 *.sym
 *.tre
 *.xsym
+*.o
+*.osym
 /Aula1/__history/
 /Aula2/__history/
 /Aula3/__history/
