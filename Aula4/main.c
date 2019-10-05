@@ -1,3 +1,4 @@
+//MELHORAR ESTE CÓDIGO, DESEMPENHO ESTÁ UMA MERDA.
 #include <main.h>
 
 #include<typedef.h>
@@ -7,9 +8,9 @@
 
 #define LIGHT_PIN PIN_B0
 
-TLuminositySensor LumSensor = {0, LOW_LVL_LIGHT};
+TLuminositySensor LumSensor = {0, LOW_LVL_LIGHT}; // struct with luminosity sensor parameters
 
-TPresenceSensor PreSensor = {1, SENSOR_OFF};
+TPresenceSensor PreSensor = {1, SENSOR_OFF}; // struct with presence sensor parameters
 
 uint8_t time      = 0;
 bool    IsTimerOn = FALSE;
@@ -23,7 +24,7 @@ void timerISR()
       {
          IsTimerOn = FALSE;
          time = 0;
-         light(LIGHT_PIN, LIGHT_OFF);
+         light(LIGHT_PIN, LIGHT_OFF); // after x seconds spent, turn lights off
       }
       else
       {
@@ -33,12 +34,10 @@ void timerISR()
 
 void main()
 {
-   //ELightLvlSensor LightSensorLevel;
-   EMachineState   MachineState = INITIAL_STATE;
-   //ELightStatus    LightStatus  = LIGHT_OFF;
-   
+   EMachineState   MachineState = INITIAL_STATE;  // Initial state of machine of states.
+     
    setup_adc(ADC_CLOCK_DIV_32);   //configura conversor AD
-   setup_adc_ports(AN0_AN1_AN3);   //escolhe pinos de entradas anal?gicas
+   setup_adc_ports(AN0_AN1_AN3);   //escolhe pinos de entradas analogicas
    
    Setup_timer_1(T1_INTERNAL|T1_DIV_BY_8);         //timer1 incrementado pelo clock interno e com prescaler 1:8
    
@@ -48,19 +47,17 @@ void main()
       set_adc_channel(LumSensor.channel);         //escolhe canal
       delay_ms(20);            //espera um tempo para a tens?o se estabilizar
       LumSensor.valor = luminositySensor(read_adc()); 
-      
-      //delay_ms(20);
-      
+     
       set_adc_channel(PreSensor.ch);         //escolhe canal
       delay_ms(20);            //espera um tempo para a tens?o se estabilizar
       PreSensor.value = presenceSensor(read_adc());
       
-      switch(MachineState)
+      switch(MachineState) //Machine State of program
       {
          case INITIAL_STATE: 
-            light(LIGHT_PIN, LIGHT_OFF);
+            light(LIGHT_PIN, LIGHT_OFF); // Turn off lights
             
-            if(LumSensor.valor == LOW_LVL_LIGHT)
+            if(LumSensor.valor == LOW_LVL_LIGHT)  
             {
                MachineState = LOW_LUMINOSITY_STATE;
             }
@@ -73,7 +70,7 @@ void main()
          case LOW_LUMINOSITY_STATE: //baixa luminosidade, pode ligar a luz ou não.
             if((PreSensor.value == SENSOR_ON) && (IsTimerOn == FALSE))
             {
-               //dispararTimer
+               //dispararTimer Interrupt
                set_timer1(0);
                enable_interrupts(global);      //para colocar 2 interrup??es no mesmo operador elas t?m que estar no mesmo registrador de controle
                enable_interrupts(int_timer1);            //habilita a interrup??o de timer1
