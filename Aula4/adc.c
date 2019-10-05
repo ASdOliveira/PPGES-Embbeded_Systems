@@ -8,17 +8,17 @@ Considering a 10bits ADC,
  MIN LEVEL < 400
 */
 
-#define MAX_THRESHOLD   800
-#define MIN_THRESHOLD   800
-#define TOUCH_THRESHOLD 200
+#define MAX_THRESHOLD   800 //3,9V
+#define MIN_THRESHOLD   400 //1,95V
+#define TOUCH_THRESHOLD 50 //0,24V
 
-ELightLvlSensor luminositySensor(uint16_t value)
+ELightLvlSensor luminositySensor(int16_t valor)
 {
-   if (value > MAX_THRESHOLD)
+   if (valor >= MAX_THRESHOLD)
    {
       return HIGH_LVL_LIGHT;
    }
-   else if (value < MIN_THRESHOLD)
+   else if (valor <= MIN_THRESHOLD)
    {
       return LOW_LVL_LIGHT;
    }
@@ -28,7 +28,7 @@ ELightLvlSensor luminositySensor(uint16_t value)
    }
 }
 
-EPresenceSensor presenceSensor(uint16_t value)
+EPresenceSensor presenceSensor(int16_t value)
 {
  if (value >= TOUCH_THRESHOLD)
  {

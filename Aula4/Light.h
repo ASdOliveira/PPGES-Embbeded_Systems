@@ -4,6 +4,6 @@
 #include<utils.h>
 #include<typedef.h>
 
-void Gpio(uint8_t PIN, ELightStatus status);
+extern void light(uint8_t PIN, ELightStatus status);
 
 #endif //LIGHT_H_

@@ -21,6 +21,15 @@ enum ELightStatus //Light status (Load)
    LIGHT_OFF
 };
 
+enum EMachineState
+{
+   INITIAL_STATE,
+   LIGHTS_ON_STATE,
+   LIGHTS_OFF_STATE,
+   LOW_LUMINOSITY_STATE,
+   HIGH_LUMINOSITY_STATE 
+};
+
 
 
 

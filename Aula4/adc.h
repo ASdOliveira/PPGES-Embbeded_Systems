@@ -6,12 +6,17 @@
 
 typedef struct
 {
+  uint8_t channel;     //channel
+  ELightLvlSensor valor; //value after convertion
+}TLuminositySensor;
+
+typedef struct
+{
   uint8_t ch;     //channel
-  uint16_t value; //value after convertion
-}Tadc;
+  EPresenceSensor value; //value after convertion
+}TPresenceSensor;
 
-
-ELightLvlSensor luminositySensor(uint16_t value);
-EPresenceSensor presenceSensor(uint16_t value);
+extern ELightLvlSensor luminositySensor(int16_t valor);
+extern EPresenceSensor presenceSensor(int16_t value);
 
 #endif //_ADC_H_

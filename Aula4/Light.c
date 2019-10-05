@@ -3,7 +3,7 @@
 
 
 
-void Gpio(uint8_t PIN, ELightStatus status)
+void light(uint8_t PIN, ELightStatus status)
 {
    if(status == LIGHT_ON)
    {
