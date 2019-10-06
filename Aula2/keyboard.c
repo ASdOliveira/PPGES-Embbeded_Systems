@@ -8,7 +8,7 @@
 
 //variáveis auxiliares
 uint8_t counter=0; 
-uint8_t button = 0xFF;//variavel preenchida com um valor padrao
+//uint8_t button = 0xFF;//variavel preenchida com um valor padrao
 
 uint8_t matrixKey[4][4] = { // posição das teclas no teclado matricial.
   {0x07, 0x08, 0x09, 0x0F},
@@ -25,34 +25,35 @@ void key_init()
 
 // ler o teclado. A ideia é escrever numa linha, ler todas as colunas e
 // devolver o valor referente a tecla lida.
-uint8_t key_read()
+EKey_status key_read(uint8_t &key_value)
 {
+   EKey_status button = NO_KEY_PRESSED;
   switch(counter)
   {
      case 0: output_b(0x01); // "ativa" a primeira linha
-             button = decodKey(counter); // ler se alguma tecla foi pressionada
+             button = decodKey(counter,key_value); // ler se alguma tecla foi pressionada
              counter = 1; // incrementa o contador...
      break;
      
      case 1: output_b(0x02); // "ativa" a segunda linha
-             button = decodKey(counter);
+             button = decodKey(counter,key_value);
              counter = 2;
      break;
      
      case 2: output_b(0x04); // "ativa" a terceira linha
-             button = decodKey(counter);
+             button = decodKey(counter,key_value);
              counter = 3;
      break;
      
      case 3: output_b(0x08);// "ativa" a quarta linha
-             button = decodKey(counter);
+             button = decodKey(counter,key_value);
              counter = 0;
      break;
   }
   return button;
 }
 
-uint8_t decodKey(uint8_t count)
+EKey_status decodKey(uint8_t count, uint8_t &value)
 {
    uint8_t columns = input_b();  // eh lido se alguma tecla fora pressionada
    columns = (columns & 0xF0) >> 4;  // mascara e deslocamento para descartar os bits menos significativos. pois correspondem ao pinos de saida
@@ -66,11 +67,12 @@ uint8_t decodKey(uint8_t count)
          case 4: columns = 2; break;
          case 8: columns = 3; break;
       }
-      return matrixKey[count][columns];    // tecla que fora pressionada
+      value = matrixKey[count][columns];    // tecla que fora pressionada
+      return ANY_KEY_WAS_PRESSED;
    }
    else
    {
-      return 0xFF; // não leu nada...
+      return NO_KEY_PRESSED; // não leu nada...
      // return 0;
    }
 }
