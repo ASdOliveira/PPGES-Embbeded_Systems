@@ -11,3 +11,4 @@
 *.o
 *.osym
 /*/__history/
+/*/*/__history/

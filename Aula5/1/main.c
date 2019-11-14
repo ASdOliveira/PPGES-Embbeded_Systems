@@ -14,13 +14,17 @@ value = bit_test (var, bit)  //testa o bit especificado
 */
 
 #include <main.h>
-#include <rotinasLCD.c>
+#use delay(crystal=20000000)
+#include <rotinasLCD.h>
+#include <int2char.h>
+#include <typedef.h>
 
 void main ()
 {
 
-int stat1 [16] = {'P','o','t','e','n','t','1',' ','='};
-int stat2 [16] = {'P','o','t','e','n','t','2',' ','='};
+int stat1 [16] = {'P','o','t','.',' ',' ','1',' ','='};
+int stat2 [16] = {'P','o','t','.',' ',' ','2',' ','='};
+char *converted_char;
 
    setup_adc(ADC_CLOCK_DIV_32);   //configura conversor AD
    setup_adc_ports(AN0_AN1_AN3);   //escolhe pinos de entradas anal?gicas
@@ -36,7 +40,7 @@ int stat2 [16] = {'P','o','t','e','n','t','2',' ','='};
       set_adc_channel(0);      //escolhe canal
       delay_ms(50);            //espera um tempo para a tens?o se estabilizar
       AD = read_adc();        //inicia a convers?o, espera ela ser concluida e retorna o valor convertido  
-      
+      converted_char = int2char(AD);
       //aqui teria que ser feito o tratamento do valor recebido para 
       //converter o numero para ascii e imprimir no LCD
       //sem saco p fazer isso agora
@@ -44,16 +48,21 @@ int stat2 [16] = {'P','o','t','e','n','t','2',' ','='};
       
       LCD_pos_cursor (0x00);     //posiciona cursor na linha 0, coluna 0
       LCD_WRITE_STRING(stat1, 9); //escreve sequencia 1
+      LCD_pos_cursor (0x0A);
+      LCD_WRITE_STRING(converted_char,4);
       LCD_pos_cursor (0x10);      //posiciona cursor na linha 1, coluna 0
       LCD_WRITE_STRING(stat2, 9); //escreve sequencia 2
       
       delay_ms(1000);
       
+
       //ler tens?o no canal um
       set_adc_channel(1);      //escolhe canal
       delay_ms(50);            //espera um tempo para a tens?o se estabilizar
       AD = read_adc();        //inicia a convers?o, espera ela ser concluida e retorna o valor convertido
-
+      *converted_char = int2char(AD);
+      LCD_pos_cursor (0x1A);
+      LCD_WRITE_STRING(converted_char,4);
       //aqui teria que ser feito o tratamento do valor recebido para 
       //converter o numero para ascii e imprimir no LCD
       //sem saco p fazer isso agora
@@ -62,6 +71,7 @@ int stat2 [16] = {'P','o','t','e','n','t','2',' ','='};
       
 
       delay_ms(1000);
+     
    }   // fim do while
 }      // fim do main
 

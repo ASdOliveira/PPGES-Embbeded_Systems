@@ -1,3 +1,5 @@
+#include <16F877A.h>
+#use delay(crystal=20000000)
 #include <rotinasLCD.h>
 
 //Arquivo com rotinas para a utiliza��o do LCD
@@ -129,7 +131,7 @@ Capacidade m�xima de 32 caracteres (m�ximo do LCD), se o cursor atingir o fi
 ele seguir� para o in�cio da linha seguinte.
 TODO: como recuperar a posi��o do cursor
 TODO: como fazer ele passar para a linha de baixo*/
-void LCD_WRITE_STRING (char LOCAL [32], int cont)
+void LCD_WRITE_STRING (CHAR LOCAL [32], int cont)
 {
    int local1;
    for (local1 = 0; local1 <= cont-1; local1++)
