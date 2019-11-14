@@ -11,7 +11,7 @@
  1023/(1 = 10^0) = 3
 
 */
-/*
+
 char *int2char(long int value, int8_t max_count)
 {
    static char converted_char[4];
@@ -19,13 +19,13 @@ char *int2char(long int value, int8_t max_count)
    for(int i=0; i<max_count; i++)
    {
       long int y = (pow(10,((max_count-1) - i)));
-      converted_char[i] =  value/y;
+      converted_char[i] = 48 + value/y;
       value = value%y;
    }
    return converted_char;
 }
-*/
 
+/*
 char *int2char (long int number)
 {
   static char tmp[4];
@@ -49,7 +49,7 @@ char makedigit (long int *number, int base)
   return map[ix];
 }
 
-
+*/
 
 
 

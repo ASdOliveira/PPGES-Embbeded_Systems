@@ -40,7 +40,7 @@ char *converted_char;
       set_adc_channel(0);      //escolhe canal
       delay_ms(50);            //espera um tempo para a tens?o se estabilizar
       AD = read_adc();        //inicia a convers?o, espera ela ser concluida e retorna o valor convertido  
-      converted_char = int2char(AD);
+      converted_char = int2char(AD,4);
       //aqui teria que ser feito o tratamento do valor recebido para 
       //converter o numero para ascii e imprimir no LCD
       //sem saco p fazer isso agora
@@ -60,7 +60,7 @@ char *converted_char;
       set_adc_channel(1);      //escolhe canal
       delay_ms(50);            //espera um tempo para a tens?o se estabilizar
       AD = read_adc();        //inicia a convers?o, espera ela ser concluida e retorna o valor convertido
-      *converted_char = int2char(AD);
+      converted_char = int2char(AD,4);
       LCD_pos_cursor (0x1A);
       LCD_WRITE_STRING(converted_char,4);
       //aqui teria que ser feito o tratamento do valor recebido para 
