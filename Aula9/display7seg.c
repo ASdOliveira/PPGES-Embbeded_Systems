@@ -67,6 +67,7 @@ int mask7seg (int a) //fun??o para converter um inteiro de 0 a 15 na sua m?scara
 void displayWrite(uint8_t digit, uint8_t displayNum)
 {
    
+   output_c(mask7seg(digit));
    switch(displayNum)
    { // display é acesso com 0...
      case 1: output_d(0b11111110); break;
@@ -77,10 +78,9 @@ void displayWrite(uint8_t digit, uint8_t displayNum)
      case 6: output_d(0b11011111); break;
      default: output_d(0xFF); break;
    }
-   output_c(mask7seg(digit));
 }
 
 void displayClear()
 {
-   output_a(0xFF);
+   output_d(0xFF);
 }
